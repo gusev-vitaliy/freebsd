@@ -1533,7 +1533,7 @@ main(int argc, char *argv[])
 #ifdef BHYVE_SNAPSHOT
 	if (restore_file != NULL) {
 		fprintf(stdout, "Pausing pci devs...\r\n");
-		if (vm_pause_user_devs() != 0) {
+		if (vm_pause_devices() != 0) {
 			fprintf(stderr, "Failed to pause PCI device state.\n");
 			exit(1);
 		}
@@ -1545,7 +1545,7 @@ main(int argc, char *argv[])
 		}
 
 		fprintf(stdout, "Restoring pci devs...\r\n");
-		if (vm_restore_user_devs(&rstate) != 0) {
+		if (vm_restore_devices(&rstate) != 0) {
 			fprintf(stderr, "Failed to restore PCI device state.\n");
 			exit(1);
 		}
@@ -1557,7 +1557,7 @@ main(int argc, char *argv[])
 		}
 
 		fprintf(stdout, "Resuming pci devs...\r\n");
-		if (vm_resume_user_devs() != 0) {
+		if (vm_resume_devices() != 0) {
 			fprintf(stderr, "Failed to resume PCI device state.\n");
 			exit(1);
 		}
